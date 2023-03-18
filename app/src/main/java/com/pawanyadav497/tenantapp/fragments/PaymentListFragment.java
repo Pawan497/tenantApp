@@ -1,5 +1,6 @@
 package com.pawanyadav497.tenantapp.fragments;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -11,8 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +24,7 @@ import android.widget.Toast;
 
 import com.pawanyadav497.tenantapp.R;
 import com.pawanyadav497.tenantapp.dbhandler.MyPaymentDbHandler;
+import com.pawanyadav497.tenantapp.dbhandler.MyTenantDbHandler;
 import com.pawanyadav497.tenantapp.model.Rent;
 import com.pawanyadav497.tenantapp.myrecycleview.MyRecyclerViewAdapter;
 
@@ -31,7 +36,7 @@ public class PaymentListFragment extends Fragment {
     private RecyclerView recyclerView;
     private MyRecyclerViewAdapter myRecyclerViewAdapter;
     private Button addRentbtn;
-    private TextView textBalance;
+    private TextView textBalance, tenantNameTxt;
 
     public PaymentListFragment() {
         // Required empty public constructor
@@ -63,6 +68,7 @@ public class PaymentListFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         MyPaymentDbHandler myDbHandler = new MyPaymentDbHandler(getContext());
+        MyTenantDbHandler tdbHandler = new MyTenantDbHandler(getContext());
 
         // Get the currentTenantID from the arguments bundle
         assert getArguments() != null;
@@ -77,16 +83,24 @@ public class PaymentListFragment extends Fragment {
 
         //For back button
         LinearLayoutCompat backbtn = view.findViewById(R.id.backbtn_ly2);
-        backbtn.setOnClickListener(new View.OnClickListener() {
+        backbtn.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
-            public void onClick(View view) {
-                requireActivity().onBackPressed();
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.my_scale_animation);
+                    backbtn.startAnimation(anim);
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    requireActivity().onBackPressed();
+                }
+                return true;
             }
         });
 
-        textBalance = view.findViewById(R.id.textBalance);
+        tenantNameTxt = view.findViewById(R.id.tenantnametxt);
+        tenantNameTxt.setText("Tenant Name: " + tdbHandler.getName(currentTenantID));
 
-//        textBalance.setText(myDbHandler.getTotalBalance(currentTenantID));
+        textBalance = view.findViewById(R.id.textBalance);
 
         int balance = Integer.parseInt(myDbHandler.getTotalBalance(currentTenantID));
 

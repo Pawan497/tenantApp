@@ -1,9 +1,13 @@
 package com.pawanyadav497.tenantapp.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,14 +62,22 @@ public class TenantListFragment extends Fragment {
 
         //For back button
         LinearLayoutCompat backbtn = view.findViewById(R.id.backbtn_ly1);
-        backbtn.setOnClickListener(new View.OnClickListener() {
+        backbtn.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
-            public void onClick(View view) {
-                requireActivity().onBackPressed();
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.my_scale_animation);
+                    backbtn.startAnimation(anim);
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    requireActivity().onBackPressed();
+                }
+                return true;
             }
         });
 
-        recyclerView = view.findViewById(R.id.recyclerViewTenant);
+
+                recyclerView = view.findViewById(R.id.recyclerViewTenant);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

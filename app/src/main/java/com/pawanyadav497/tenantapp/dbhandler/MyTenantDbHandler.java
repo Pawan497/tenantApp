@@ -1,5 +1,6 @@
 package com.pawanyadav497.tenantapp.dbhandler;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -109,13 +110,12 @@ public class MyTenantDbHandler extends SQLiteOpenHelper {
         }
     }
 
-    //XXXX To update the list when the database is changed,
-//    Define a listener interface
+    //To update the list when the database is changed,
+    //Define a listener interface
     public interface OnDatabaseChangedListener {
         void onDatabaseChanged();
     }
 
-    //XXXX
     public void setOnDatabaseChangedListener(OnDatabaseChangedListener listener) {
         mListener = listener;
     }
@@ -135,30 +135,25 @@ public class MyTenantDbHandler extends SQLiteOpenHelper {
         return idTenantLast;
     }
 
-    //xxxxxxxxxxxxxx
-//    public String getAllTenantString(int waste) {
-//        String result = "";
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        Cursor cursor = db.rawQuery("SELECT * FROM " + ParamsTenant.DATABASE_TABLE, null);
-//        int count = cursor.getCount();
-//        int columnCount = cursor.getColumnCount();
-//
-//        if (count > 0) {
-//            while (cursor.moveToNext()) {
-//                for (int i = 0; i < columnCount; i++) {
-//                    result += cursor.getColumnName(i) + ": " + cursor.getString(i) + "\n";
-//                }
-//                result += "\n";
-//            }
-//        } else {
-//            result = "No data found.";
-//        }
-//
-//        cursor.close();
-//        db.close();
-//
-//        return result;
-//    }
+    @SuppressLint("Range")
+    public String getName(int tenantId) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        // Generate the query to read from the database
+        String selectQuery = "SELECT " + ParamsTenant.NAME + " FROM " + ParamsTenant.DATABASE_TABLE + " WHERE " + ParamsTenant.TENANT_ID + " = ?";
+        Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, new String[]{String.valueOf(tenantId)});
+
+        String name = null;
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(cursor.getColumnIndex(ParamsTenant.NAME));
+        }
+
+        cursor.close();
+        sqLiteDatabase.close();
+
+        return name;
+    }
+
+
 }
 

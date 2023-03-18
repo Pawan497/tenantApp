@@ -63,7 +63,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         holder.balance.setText(String.valueOf(balance));
 
-//        holder.balance.setText(rent.getBalance());
     }
 
     @Override
@@ -87,7 +86,6 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             paid = itemView.findViewById(R.id.table_item5);
             balance = itemView.findViewById(R.id.table_item6);
 
-//            balance.setOnClickListener(this);
 
         }
 

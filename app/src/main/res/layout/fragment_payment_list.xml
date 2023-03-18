@@ -27,7 +27,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="From" />
+            android:text="@string/from" />
 
         <TextView
             android:id="@+id/tabletitle_item2"
@@ -38,7 +38,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="To" />
+            android:text="@string/to" />
 
         <TextView
             android:id="@+id/tabletitle_item3"
@@ -49,7 +49,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="Date" />
+            android:text="@string/date" />
 
         <TextView
             android:id="@+id/tabletitle_item4"
@@ -60,7 +60,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="Rent" />
+            android:text="@string/rent" />
 
         <TextView
             android:id="@+id/tabletitle_item5"
@@ -71,7 +71,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="Paid" />
+            android:text="@string/paid" />
 
         <TextView
             android:id="@+id/tabletitle_item6"
@@ -82,14 +82,14 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:gravity="center"
-            android:text="Balance" />
+            android:text="@string/balance" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewTenant"
         android:layout_width="0sp"
-        android:layout_height="475sp"
+        android:layout_height="505sp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="80dp"
@@ -103,21 +103,22 @@
         android:id="@+id/tablename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Payment History"
-        android:textStyle="bold"
-        android:textSize="22sp"
+        android:text="@string/payment_history"
         android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/addRentbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Rent"
+        android:text="@string/add_rent"
         android:textStyle="bold"
         android:fontFamily="cursive"
         android:textSize="20sp"
@@ -146,8 +147,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingStart="12sp"
+            android:paddingEnd="0sp"
             android:paddingTop="5sp"
-            android:text="Balance"
+            android:text="@string/balance"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -158,6 +160,7 @@
             android:layout_weight="1"
             android:gravity="end"
             android:paddingTop="5sp"
+            android:paddingStart="0sp"
             android:paddingEnd="12sp"
             android:text="@string/_0000"
             android:textSize="26sp"
@@ -195,6 +198,21 @@
             android:layout_gravity="center"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        android:id="@+id/tenantnametxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:textColor="@color/light_blue_900"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewTenant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tablename"
+        app:layout_constraintVertical_bias="0.060000002"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

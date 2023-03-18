@@ -1,6 +1,5 @@
 package com.pawanyadav497.tenantapp.model;
 
-import java.util.Date;
 
 public class Rent {
 
@@ -12,17 +11,6 @@ public class Rent {
     private String amt_paid;
     private String balance;
     private int tenantID;
-
-//    public Rent( String from, String to, String amt_due, String amt_paid, String balance){
-//        this.from = from;
-//        this.to = to;
-//        this.amt_due = amt_due;
-//        this.amt_paid = amt_paid;
-//        this.balance = balance;
-//
-//        Date date = new Date();
-//        this.payment_date = date.toString();
-//    }
 
 
     public int getId() { return id; }

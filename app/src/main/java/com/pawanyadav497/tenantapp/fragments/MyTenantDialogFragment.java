@@ -77,9 +77,6 @@ public class MyTenantDialogFragment extends DialogFragment implements PdfUploadL
 
         tenantListViewModel = new ViewModelProvider(requireActivity()).get(TenantListViewModel.class);
 
-        //Database handler initialisation
-//        MyTenantDbHandler myDbHandler = new MyTenantDbHandler(getContext());
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         if (tenant != null) {
@@ -127,19 +124,11 @@ public class MyTenantDialogFragment extends DialogFragment implements PdfUploadL
                                     tenant.setAddress(addressStr);
                             }
 
-
-//                            if(!chosenfiletxt.getText().equals(currentFileName)){
-                                if (!chosenfiletxt.getText().equals(currentFileName) && uri != null && fileName != null) {
-//                                    PdfUploader pdfUploader = new PdfUploader();
-//                                    String pdfFullPath = pdfUploader.uploadAndCopyPdf(tenant.getTenantID(), uri, fileName, getActivity());
-//                                    tenant.setPdf_path(pdfFullPath);
+                             if (!chosenfiletxt.getText().equals(currentFileName) && uri != null && fileName != null) {
 
                                 UploadPdfTask task = new UploadPdfTask(MyTenantDialogFragment.this, tenant, uri, fileName, MyTenantDialogFragment.this);
                                 task.execute();
                             }else {
-//                                tenantListViewModel.editTenant(tenant);
-//                                Toast.makeText(getActivity(), "Database edited tenantID " + tenant.getTenantID(), Toast.LENGTH_SHORT).show();
-//                                dismiss();
                                 onPdfUploadComplete(null);
                             }
 
@@ -181,24 +170,14 @@ public class MyTenantDialogFragment extends DialogFragment implements PdfUploadL
                                     int newtenantId = tenantListViewModel.getLastTenantID() + 1;
                                     tenant.setTenantID(newtenantId);
 
-//                                    PdfUploader pdfUploader = new PdfUploader();
-//                                    String pdfFullPath = pdfUploader.uploadAndCopyPdf(newtenantId, uri, fileName, getActivity());
-//                                    tenant.setPdf_path(pdfFullPath);
-
                                     UploadPdfTask task = new UploadPdfTask(MyTenantDialogFragment.this, tenant, uri, fileName, MyTenantDialogFragment.this);
                                     task.execute();
 
-//                                    uploadAndCopyPdf(newtenantId);
                                 }
                                 else {
                                     tenant.setPdf_path("None");
                                     onPdfUploadComplete(null);
                                 }
-
-
-//                                tenantListViewModel.addTenant(tenant);
-//                                Toast.makeText(getActivity(), "Database added => " + chosenfiletxt.getText(), Toast.LENGTH_SHORT).show();
-//                                dismiss();
 
                             }
 
@@ -237,7 +216,6 @@ public class MyTenantDialogFragment extends DialogFragment implements PdfUploadL
             Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
             try {
                 if (cursor != null && cursor.moveToFirst()) {
-//                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                     int nameIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
                     if (nameIndex >= 0) {
                         result = cursor.getString(nameIndex);

@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/drawable/activity_background.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/drawable/button_bg.xml" value="0.1" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/drawable/linear_layout_background.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/drawable/rainbow_gradient.xml" value="0.21614583333333334" />
         <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/activity_main.xml" value="0.12273550724637682" />
         <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/activity_pdf_viewer.xml" value="0.25" />
@@ -16,9 +18,9 @@
         <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_home_sign.xml" value="0.25" />
         <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_my_dialog.xml" value="0.25" />
         <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_my_dialog_tenant.xml" value="0.22" />
-        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_payment_list.xml" value="0.22" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_payment_list.xml" value="0.33" />
         <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
-        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_tenant_list.xml" value="0.23768115942028986" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_tenant_list.xml" value="0.1" />
         <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_upload_progress_dialog.xml" value="0.33" />
         <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/raufdelete.xml" value="0.1" />
         <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/recyclerview_item.xml" value="0.37082818294190356" />

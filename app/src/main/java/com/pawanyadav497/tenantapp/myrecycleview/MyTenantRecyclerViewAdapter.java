@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,19 +64,19 @@ public class MyTenantRecyclerViewAdapter extends RecyclerView.Adapter<MyTenantRe
         } else {
             holder.view_pdf_btn.setVisibility(View.VISIBLE);
         }
-//        holder.upload.setText(rent.getPayment_date()); if happened
     }
 
     @Override
     public int getItemCount() {
         return tenantList.size();
     }
-//corrected
+
     public class TenantViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView name, phoneNo, address;
         public MaterialButton editViewbtn, deletebtn, view_pdf_btn;
         public Tenant tenant;
+        public LinearLayout tenantbtn;
 
 
     public TenantViewHolder(View itemView) {
@@ -88,34 +89,13 @@ public class MyTenantRecyclerViewAdapter extends RecyclerView.Adapter<MyTenantRe
             editViewbtn = itemView.findViewById(R.id.edit_tenant_btn);
             deletebtn = itemView.findViewById(R.id.delete_tenant_btn);
             view_pdf_btn = itemView.findViewById(R.id.view_pdf_btn);
+            tenantbtn = itemView.findViewById(R.id.linear_tenantbtn);
 
-//            name.setOnClickListener(this);
-            name.setOnClickListener(new View.OnClickListener() {
+            tenantbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Toast.makeText(context.getApplicationContext(), "clicked name " + tenant.getTenantID(), Toast.LENGTH_SHORT).show();
                     movingTOPaymentFragment();
-
                 }
-            });
-
-            phoneNo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    Toast.makeText(context.getApplicationContext(), "clicked phone " + tenant.getTenantID(), Toast.LENGTH_SHORT).show();
-                    movingTOPaymentFragment();
-
-                }
-            });
-
-
-            address.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-//                     Toast.makeText(context.getApplicationContext(), "clicked address " + tenant.getTenantID(), Toast.LENGTH_SHORT).show();
-                     movingTOPaymentFragment();
-
-                    }
             });
 
             editViewbtn.setOnClickListener(new View.OnClickListener() {

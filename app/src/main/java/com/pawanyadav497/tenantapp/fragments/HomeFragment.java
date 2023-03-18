@@ -1,9 +1,13 @@
 package com.pawanyadav497.tenantapp.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -59,18 +63,34 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        signOutbtn.setOnClickListener(new View.OnClickListener() {
+
+        signOutbtn.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
-            public void onClick(View view) {
-                signOut();
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.my_scale_animation);
+                    signOutbtn.startAnimation(anim);
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    signOut();
+                }
+                return true;
             }
         });
 
-        exitbtn.setOnClickListener(new View.OnClickListener() {
+
+        exitbtn.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
             @Override
-            public void onClick(View view) {
-                // Exit the app
-                getActivity().finishAffinity();
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.my_scale_animation);
+                    exitbtn.startAnimation(anim);
+                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    // Exit the app
+                    getActivity().finishAffinity();
+                }
+                return true;
             }
         });
 
