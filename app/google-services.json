@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "653152723529",
+    "project_id": "tenantapp-ac042",
+    "storage_bucket": "tenantapp-ac042.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653152723529:android:7a0f12a62fdaa034831598",
+        "android_client_info": {
+          "package_name": "com.pawanyadav497.tenantapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653152723529-9nmkv4ugqu2brb4j4vckn9i55t7sbtjm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC48IsuM3A1DED2nFRLfIB_7wh0hrj1wII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653152723529-9nmkv4ugqu2brb4j4vckn9i55t7sbtjm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

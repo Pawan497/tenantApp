@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title">Tenant App Description and Guide</string>
+    <string name="title_description">The Tenant App is a tool designed to help landlords and property managers manage their tenants effectively. Here\'s a brief guide on how to use the app.</string>
+    <string name="add_tenant1">Add Tenant:</string>
+    <string name="add_tenant_description"> To add a tenant, click on the "Add Tenant" button located in the Home Page. This will bring up a dialog where you can fill out the tenant\'s details and upload a tenant-related PDF. Once you have filled out all the details, click the "Add Tenant" button in the dialog box to add the tenant to your list. Please ensure that all details are written correctly. If any information is incomplete or inaccurate, the tenant will not be added to the list.</string>
+    <string name="view_tenant_list">View Tenant List:</string>
+    <string name="view_tenant_list_description"> To view a list of your tenants, click on the "See Tenant List" button in the Home Page. You will be taken to a page where you can view all of the tenants you have added to the app. You will also see options to edit, delete or view PDF documents associated with the tenant.</string>
+    <string name="add_payment">Add Payment:</string>
+    <string name="add_payment_description"> To add payment details for a particular tenant, click on the respective tenant\'s name in the tenant list. This will take you to the Payment History page where you can add a new payment record by clicking on the "Add Rent" button. Fill in the payment details and then click the "Add" button to add the payment record.</string>
+    <string name="edit_payment_record">Edit Payment Record:</string>
+    <string name="edit_payment_record_description"> To edit a payment record, click on the payment record you wish to edit on the Payment History page. This will bring up the payment details in a dialog box where you can make changes to the payment details. Once you have made your changes, click on the "Save Changes" button to save the changes.</string>
+    <string name="save_fetch_database">Save and Fetch Database:</string>
+    <string name="save_fetch_database_description"> To save your data, click on the "Save Data" button in the Home Page. This will save all your data to the database. If you do not save your data and your phone is lost, all your data will be lost too. To retrieve your data from the database, click on the "Fetch Data" button in the Home Page. This will bring back all your saved data.</string>
+</resources>

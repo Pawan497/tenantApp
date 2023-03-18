@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/drawable/activity_background.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/drawable/rainbow_gradient.xml" value="0.21614583333333334" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/activity_main.xml" value="0.12273550724637682" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/activity_pdf_viewer.xml" value="0.25" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/activity_splash.xml" value="0.2" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/deletablelayout.xml" value="0.1" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_delete_google.xml" value="0.2" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_delete_google_login.xml" value="0.1859375" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_help.xml" value="0.1782178217821782" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_home_sign.xml" value="0.25" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_my_dialog.xml" value="0.25" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_my_dialog_tenant.xml" value="0.22" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_payment_list.xml" value="0.22" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_tenant_list.xml" value="0.23768115942028986" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/fragment_upload_progress_dialog.xml" value="0.33" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/raufdelete.xml" value="0.1" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/recyclerview_item.xml" value="0.37082818294190356" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/recyclerview_tenant_item.xml" value="0.25" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/layout/rowfor_recyclerview.xml" value="0.75" />
+        <entry key="..\:/Users/d com/AndroidStudioProjects/TenantApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.21614583333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
