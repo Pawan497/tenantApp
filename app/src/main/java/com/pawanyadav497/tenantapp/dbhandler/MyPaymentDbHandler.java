@@ -150,17 +150,18 @@ public class MyPaymentDbHandler extends SQLiteOpenHelper {
         String selectQuery = "SELECT " + Params.BALANCE + " FROM " + Params.DATABASE_TABLE + " WHERE " + Params.TENANT_ID + " = " + currentTenantID;
         Cursor cursor = sqLiteDatabase.rawQuery(selectQuery, null);
 
-        int totalBalance = 0;
+        long totalBalance = 0;
 
         if (cursor.moveToFirst()) {
             do {
-                totalBalance += Integer.parseInt(cursor.getString(0));
+                totalBalance += (long)(Double.parseDouble(cursor.getString(0))*100);
             } while (cursor.moveToNext());
         }
 
         cursor.close();
         sqLiteDatabase.close();
 
-        return String.valueOf(totalBalance);
+        // Convert the total balance back to a decimal value with two decimal places
+        return String.format("%.2f", totalBalance / 100.0);
     }
 }

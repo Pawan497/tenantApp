@@ -50,8 +50,9 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
         holder.due.setText(rent.getAmt_due());
         holder.paid.setText(rent.getAmt_paid());
 
-
-        int balance = Integer.parseInt(rent.getBalance());
+        double balanceDouble = Double.parseDouble(rent.getBalance());
+        balanceDouble = Math.round(balanceDouble * 100.0) / 100.0;
+        long balance = (long)(balanceDouble * 100);
 
         if (balance <= 0) {
             // balance is zero or negative, so set text color to green
@@ -61,7 +62,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
             holder.balance.setTextColor(Color.RED);
         }
 
-        holder.balance.setText(String.valueOf(balance));
+        holder.balance.setText(rent.getBalance());
 
     }
 

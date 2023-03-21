@@ -7,7 +7,9 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -85,6 +87,13 @@ public class SignUpFragment extends Fragment {
         confirmPassword = view.findViewById(R.id.editTextConfirmPassword2);
         signUpbtn = view.findViewById(R.id.signUpbtn);
 
+        signUpbtn.setEnabled(false); // disable sign-up button initially
+
+        // add text change listeners to all fields
+        email.addTextChangedListener(textWatcher);
+        password.addTextChangedListener(textWatcher);
+        confirmPassword.addTextChangedListener(textWatcher);
+
         signUpbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,4 +162,51 @@ public class SignUpFragment extends Fragment {
         String passwordRegex = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
         return password.matches(passwordRegex);
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            validateInputsAndEnableButton();
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {}
+    };
+
+    private void validateInputsAndEnableButton() {
+        String emailString = email.getText().toString().trim();
+        String passwordString = password.getText().toString().trim();
+        String confirmPasswordString = confirmPassword.getText().toString().trim();
+
+        boolean isValidEmail = isValidEmail(emailString);
+        boolean isValidPassword = isValidPassword(passwordString);
+        boolean doPasswordsMatch = passwordString.equals(confirmPasswordString);
+
+        // enable sign-up button if all fields are valid
+        signUpbtn.setEnabled(isValidEmail && isValidPassword && doPasswordsMatch);
+
+        // set error messages for invalid fields
+        if (!isValidEmail) {
+            email.setError("Invalid email address!");
+        } else {
+            email.setError(null); // clear error message
+        }
+
+        if (!isValidPassword) {
+            password.setError("Invalid password: must be at least 8 characters long, contain at least one digit, one symbol, and one letter");
+        } else {
+            password.setError(null); // clear error message
+        }
+
+        if (!doPasswordsMatch) {
+            confirmPassword.setError("Passwords do not match");
+        } else {
+            confirmPassword.setError(null); // clear error message
+        }
+    }
+
+
 }

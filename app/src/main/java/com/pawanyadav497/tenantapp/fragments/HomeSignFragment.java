@@ -17,8 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +54,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.pawanyadav497.tenantapp.MainActivity;
 import com.pawanyadav497.tenantapp.R;
 import com.pawanyadav497.tenantapp.save_and_fetch.FetchFromDataStorage;
@@ -180,15 +184,10 @@ public class HomeSignFragment extends Fragment {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                signInWithGoogle();
                 googleSignInMethod();
             }
         });
 
-
-
-        emailEditText = view.findViewById(R.id.editTextEmailAddress);
-        passwordEditText = view.findViewById(R.id.editTextPassword);
 
         togglebtn = view.findViewById(R.id.passwordToggleImageView);
 
@@ -212,6 +211,15 @@ public class HomeSignFragment extends Fragment {
 
 
         signInbtn = view.findViewById(R.id.signInbtn);
+
+        signInbtn.setEnabled(false);
+
+        emailEditText = view.findViewById(R.id.editTextEmailAddress);
+        passwordEditText = view.findViewById(R.id.editTextPassword);
+
+        emailEditText.addTextChangedListener(textWatcher);
+        passwordEditText.addTextChangedListener(textWatcher);
+
         signUpPagebtn = view.findViewById(R.id.signUpPagebtn);
 
         signInbtn.setOnClickListener(new View.OnClickListener() {
@@ -243,41 +251,55 @@ public class HomeSignFragment extends Fragment {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
-        if (email.isEmpty() || password.isEmpty()) {
-            Toast.makeText(getActivity(), "Please enter your email and password", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         // Show a progress dialog while the sign-in process is being executed
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Signing in...");
         progressDialog.show();
 
-        // Call the Firebase Authentication signInWithEmailAndPassword method to sign the user in
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        // Check if email is registered with Firebase
+        mAuth.fetchSignInMethodsForEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                     @Override
-                    public void onComplete( Task<AuthResult> task) {
-                        progressDialog.dismiss();
+                    public void onComplete( Task<SignInMethodQueryResult> task) {
                         if (task.isSuccessful()) {
-                            FetchFromDataStorage fetcher = new FetchFromDataStorage();
-                            fetcher.downloadDatabases((AppCompatActivity) getActivity());
-
-                            // Sign-in successful, call the onSignInSuccessful method of the MainActivity
-                            ((MainActivity) getActivity()).onSignInSuccessful();
+                            boolean emailRegistered = !task.getResult().getSignInMethods().isEmpty();
+                            if (!emailRegistered) {
+                                progressDialog.dismiss();
+                                emailEditText.setError("Email is not registered yet");
+                                return;
+                            }
                         } else {
+                            progressDialog.dismiss();
+                            Toast.makeText(getActivity(), "Error checking email registration. Please try again.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
 
-                            checkInternet();
+                // Call the Firebase Authentication signInWithEmailAndPassword method to sign the user in
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete( Task<AuthResult> task) {
+                                progressDialog.dismiss();
+                                if (task.isSuccessful()) {
+                                    FetchFromDataStorage fetcher = new FetchFromDataStorage();
+                                    fetcher.downloadDatabases((AppCompatActivity) getActivity());
 
-                            // Sign-in failed, show an error message to the user
-                            // If sign in fails, display a message to the user.
-                            if (task.getException() instanceof FirebaseAuthInvalidUserException) {
-                                emailEditText.setError("This email does not exist");
-                            } else if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                passwordEditText.setError("Incorrect password");
-                            }else {
-                                Toast.makeText(getActivity(), "Sign-in failed. Please try again.", Toast.LENGTH_SHORT).show();
-                            }}
+                                       // Sign-in successful, call the onSignInSuccessful method of the MainActivity
+                                        ((MainActivity) getActivity()).onSignInSuccessful();
+                                } else {
+
+                                    checkInternet();
+
+                                     // Sign-in failed, show an error message to the user
+                                    // If sign in fails, display a message to the user.
+                                    if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                    passwordEditText.setError("Incorrect password");
+                                    }else {
+                                        Toast.makeText(getActivity(), "Sign-in failed. Please try again.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        });
                     }
                 });
     }
@@ -289,7 +311,6 @@ public class HomeSignFragment extends Fragment {
         if (activeNetworkInfo == null || !activeNetworkInfo.isConnected()) {
             // Show red toast message if internet is not connected
             Toast.makeText(getActivity(), "Internet is not connected!!", Toast.LENGTH_SHORT).show();
-
         }
     }
 
@@ -314,4 +335,57 @@ public class HomeSignFragment extends Fragment {
                     }
                 });
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            validateInputsAndEnableButton();
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {}
+    };
+
+    private void validateInputsAndEnableButton() {
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        boolean isValidEmail = isValidEmail(email);
+        boolean isValidPassword = isValidPassword(password);
+
+        if (isValidEmail && isValidPassword) {
+            signInbtn.setEnabled(true);
+        } else {
+            signInbtn.setEnabled(false);
+        }
+    }
+
+    private boolean isValidEmail(String email) {
+        if (email.isEmpty()) {
+            emailEditText.setError("Email is required");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailEditText.setError("Invalid email address");
+            return false;
+        } else {
+            emailEditText.setError(null);
+            return true;
+        }
+    }
+
+    private boolean isValidPassword(String password) {
+        if (password.isEmpty()) {
+            passwordEditText.setError("Password is required");
+            return false;
+        } else if (password.length() < 8) {
+            passwordEditText.setError("Password must be at least 8 characters long");
+            return false;
+        } else {
+            passwordEditText.setError(null);
+            return true;
+        }
+    }
+
 }
