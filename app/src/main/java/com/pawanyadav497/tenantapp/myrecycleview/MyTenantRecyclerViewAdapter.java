@@ -1,6 +1,8 @@
 package com.pawanyadav497.tenantapp.myrecycleview;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +66,13 @@ public class MyTenantRecyclerViewAdapter extends RecyclerView.Adapter<MyTenantRe
         } else {
             holder.view_pdf_btn.setVisibility(View.VISIBLE);
         }
+
+        // Check if phone no. is None and hide the view_pdf_btn button
+        if (tenant.getPhoneNo().trim().equals("None")) {
+            holder.callbtn.setVisibility(View.GONE);
+        } else {
+            holder.callbtn.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -74,7 +83,7 @@ public class MyTenantRecyclerViewAdapter extends RecyclerView.Adapter<MyTenantRe
     public class TenantViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView name, phoneNo, address;
-        public MaterialButton editViewbtn, deletebtn, view_pdf_btn;
+        public MaterialButton editViewbtn, deletebtn, view_pdf_btn, callbtn;
         public Tenant tenant;
         public LinearLayout tenantbtn;
 
@@ -90,6 +99,7 @@ public class MyTenantRecyclerViewAdapter extends RecyclerView.Adapter<MyTenantRe
             deletebtn = itemView.findViewById(R.id.delete_tenant_btn);
             view_pdf_btn = itemView.findViewById(R.id.view_pdf_btn);
             tenantbtn = itemView.findViewById(R.id.linear_tenantbtn);
+            callbtn = itemView.findViewById(R.id.callbtn);
 
             tenantbtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -118,6 +128,21 @@ public class MyTenantRecyclerViewAdapter extends RecyclerView.Adapter<MyTenantRe
                 public void onClick(View view) {
                     PdfHandler pdfHandler = new PdfHandler(context, tenant, activity);
                     pdfHandler.openOrDownloadPdf();
+                }
+            });
+
+            callbtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Call on Phone No.
+                    String phoneNumber = tenant.getPhoneNo();
+                    if (phoneNumber != null && !phoneNumber.isEmpty()) {
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        intent.setData(Uri.parse("tel:" + phoneNumber));
+                        context.startActivity(intent);
+                    } else {
+                        Toast.makeText(context, "Phone number not available", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
